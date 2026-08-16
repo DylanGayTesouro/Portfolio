@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Ingénierie | Dylan Gay-Tesouro</title>
+    <!-- Chargement des bibliothèques via CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { animation: slideUp 0.5s ease-out; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Style pour les placeholders d'images en attendant les vraies */
+        .image-placeholder {
+            background-color: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 1rem;
+        }
+        .image-placeholder img {
+            opacity: 0; /* Cache l'icone de l'image brisée si src vide */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-[#FDFDFF] text-slate-900 overflow-x-hidden">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const Icon = ({ name, size = 24, className = "" }) => {
+            const icons = {
+                settings: (
+                    <>
+                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </>
+                ),
+                code: <polyline points="16 18 22 12 16 6 8 6 2 12 8 18"/>,
+                tool: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>,
+                thermometer: <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>,
+                mail: (
+                    <>
+                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </>
+                ),
+                linkedin: (
+                    <>
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect width="4" height="12" x="2" y="9"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </>
+                ),
+                briefcase: (
+                    <>
+                        <rect width="20" height="14" x="2" y="7" rx="2"/>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    </>
+                ),
+                graduation: (
+                    <>
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </>
+                ),
+                activity: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            };
+            return (
+                <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                    {icons[name] || icons.settings}
+                </svg>
+            );
+        };
+
+        const Illustration = ({ type }) => {
+            if (type === 'volant') return (
+                <svg viewBox="0 0 200 200" className="w-full h-full text-emerald-500 opacity-60">
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="8 4" />
+                    <circle cx="100" cy="100" r="40" fill="none" stroke="currentColor" strokeWidth="4" />
+                    <path d="M100 20 L100 180 M20 100 L180 100" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+                    <circle cx="100" cy="100" r="5" fill="currentColor" />
+                    <path d="M130 40 Q150 60 150 90" fill="none" stroke="currentColor" strokeWidth="2" />
+                </svg>
+            );
+            if (type === 'thermique') return (
+                <svg viewBox="0 0 200 120" className="w-full h-full">
+                    <defs>
+                        <linearGradient id="heat" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#f43f5e" />
+                            <stop offset="100%" stopColor="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="10" y="10" width="180" height="100" fill="url(#heat)" rx="4" />
+                    {[...Array(10)].map((_, i) => <line key={i} x1={10+i*20} y1="10" x2={10+i*20} y2="110" stroke="#fff" strokeWidth="0.2" />)}
+                    {[...Array(6)].map((_, i) => <line key={i} x1="10" y1={10+i*20} x2="190" y2={10+i*20} stroke="#fff" strokeWidth="0.2" />)}
+                </svg>
+            );
+            return null;
+        };
+
+        // Composant pour gérer l'affichage conditionnel des vraies images vs placeholders
+        const ProjectImage = ({ src, alt, placeholderText, className = "" }) => {
+            return (
+                <div className={`relative overflow-hidden rounded-2xl ${className} image-placeholder`} style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                    {/* Le texte disparaît virtuellement si l'image se charge grâce au background */}
+                    <span className="bg-white/80 px-4 py-2 rounded shadow-sm backdrop-blur-sm z-10 pointer-events-none">
+                        {placeholderText}
+                    </span>
+                    <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-cover opacity-0" onError={(e) => e.target.style.display = 'none'} onLoad={(e) => { e.target.style.opacity = 1; e.target.previousSibling.style.display = 'none'; e.target.parentElement.style.backgroundColor = 'transparent'; e.target.parentElement.style.border = 'none'; }} />
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [tab, setTab] = useState('alberts');
+
+            return (
+                <div className="min-h-screen pb-10">
+                    {/* HEADER */}
+                    <header className="fixed top-0 w-full z-50 border-b border-slate-100 px-8 h-20 flex items-center justify-between bg-white/80 backdrop-blur-xl">
+                        <div className="flex flex-col">
+                            <h1 className="font-black text-xl uppercase tracking-tighter leading-none">Dylan Gay-Tesouro</h1>
+                            <p className="text-[10px] font-bold text-indigo-600 tracking-[0.2em] mt-1 uppercase">Portfolio</p>
+                        </div>
+                        <div className="flex gap-6 items-center">
+                            <a href="https://www.linkedin.com/in/dylan-gay-tesouro-a764aa250/" target="_blank" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                                <Icon name="linkedin" size={20} />
+                            </a>
+                            <a href="mailto:dylangaytesouro@gmail.com" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                                <Icon name="mail" size={20} />
+                            </a>
+                        </div>
+                    </header>
+
+                    {/* HERO BANNER */}
+                    <section className="pt-44 pb-24 px-8 max-w-7xl mx-auto border-b border-slate-100">
+                        <div className="max-w-4xl">
+                            <h2 className="text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-8 leading-tight">
+                                Portfolio <br/> <span className="text-indigo-600">d'Ingénierie</span>
+                            </h2>
+                            <div className="space-y-6">
+                                <p className="text-xl text-slate-500 font-medium leading-relaxed italic border-l-4 border-indigo-500 pl-6">
+                                    Élève-Ingénieur en Génie Mécanique à Polytech Lyon. 
+                                    Ce document compile mes expériences en développement de produits industriels (R&D, optimisation numérique, DFM) et mes projets de modélisation analytique.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* NAVIGATION & CONTENU */}
+                    <section className="bg-slate-50/30 py-24 px-8">
+                        <div className="max-w-7xl mx-auto">
+                            
+                            {/* GRILLE 1 : STAGES (2 boutons) */}
+                            <div className="mb-12">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <Icon name="briefcase" className="text-indigo-600" size={28}/>
+                                    <h3 className="text-2xl font-black uppercase tracking-tight text-slate-800">Expériences Industrielles</h3>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <button onClick={() => setTab('alberts')} className={`p-8 rounded-[2rem] border-2 text-left transition-all h-full ${tab === 'alberts' ? 'bg-white border-blue-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-200'}`}>
+                                        <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest block mb-2">Mars — Août 2026</span>
+                                        <h4 className="font-black uppercase text-base leading-tight mb-2">R&D Robotique & Mécatronique</h4>
+                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-tight">Stage Fin d'Études — Alberts N.V.</p>
+                                    </button>
+                                    <button onClick={() => setTab('reel')} className={`p-8 rounded-[2rem] border-2 text-left transition-all h-full ${tab === 'reel' ? 'bg-white border-indigo-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-200'}`}>
+                                        <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest block mb-2">Mars — Juillet 2025</span>
+                                        <h4 className="font-black uppercase text-base leading-tight mb-2">Base de connaissance RDM</h4>
+                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-tight">Stage 4A — REEL International</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* GRILLE 2 : PROJETS ACADÉMIQUES (2 boutons) */}
+                            <div className="mb-16">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <Icon name="graduation" className="text-emerald-600" size={28}/>
+                                    <h3 className="text-2xl font-black uppercase tracking-tight text-slate-800">Projets Académiques</h3>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <button onClick={() => setTab('volant')} className={`p-8 rounded-[2rem] border-2 text-left transition-all h-full ${tab === 'volant' ? 'bg-white border-emerald-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-200'}`}>
+                                        <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest block mb-2">Oct 2025 — Fév 2026</span>
+                                        <h4 className="font-black uppercase text-base leading-tight mb-2">Récupération d'énergie</h4>
+                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-tight">Projet Industriel 5A</p>
+                                    </button>
+                                    <button onClick={() => setTab('mef')} className={`p-8 rounded-[2rem] border-2 text-left transition-all h-full ${tab === 'mef' ? 'bg-white border-rose-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-200'}`}>
+                                        <span className="text-[10px] font-black text-rose-500 uppercase tracking-widest block mb-2">Nov 2024 — Jan 2025</span>
+                                        <h4 className="font-black uppercase text-base leading-tight mb-2">Analyse thermique MEF</h4>
+                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-tight">Projet Numérique 4A</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* PANEL DE CONTENU DYNAMIQUE */}
+                            <div className="bg-white rounded-[3rem] p-8 lg:p-14 border border-slate-100 shadow-2xl min-h-[600px] tab-content relative overflow-hidden">
+                                
+                                {/* CONTENU : ALBERTS */}
+                                {tab === 'alberts' && (
+                                    <div className="animate-in fade-in space-y-12">
+                                        
+                                        <div className="flex flex-col md:flex-row gap-8 justify-between items-start">
+                                            <div>
+                                                <div className="flex flex-wrap gap-2 mb-6 uppercase text-[9px] font-black tracking-widest">
+                                                    <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded">CAO / DFM</span>
+                                                    <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded">Dynamique des Rotors</span>
+                                                    <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded">Python</span>
+                                                    <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded">Impression 3D</span>
+                                                </div>
+                                                <h4 className="text-4xl font-black tracking-tighter text-slate-900 leading-tight">Conception et Industrialisation d'un Module de Mixage Automatisé</h4>
+                                                <p className="text-blue-600 font-bold mt-2">Alberts N.V. (Belgique) — Startup Robotique FoodTech</p>
+                                            </div>
+                                            <div className="hidden md:block w-1/3 shrink-0 h-40">
+                                                <ProjectImage src="alberts-machine.jpg" alt="Machine Alberts" placeholderText="[Insérer: alberts-machine.jpg]" className="w-full h-full" />
+                                            </div>
+                                        </div>
+
+                                        {/* Focus 1 : Blender V2 (80%) */}
+                                        <div className="border-t border-slate-100 pt-10">
+                                            <h5 className="text-xl font-black uppercase text-slate-800 mb-6 flex items-center gap-3">
+                                                <Icon name="settings" size={24} className="text-blue-500"/>
+                                                Projet Principal : Le Blender V2
+                                            </h5>
+                                            <div className="grid lg:grid-cols-2 gap-10">
+                                                <div className="space-y-5 text-slate-600 text-sm leading-relaxed">
+                                                    <p>
+                                                        <strong>Défi technique :</strong> L'architecture de première génération utilisait un joint en silicone collé chimiquement qui se dégradait sous l'effet de la vapeur (120°C) et de la haute pression, générant des fuites critiques.
+                                                    </p>
+                                                    <p>
+                                                        <strong>Solution CAO & DFM :</strong> Redesign complet vers une architecture modulaire "sandwich". Le joint est désormais maintenu par pure compression mécanique. Optimisation des pièces pour un usinage CNC en Inox 316L, avec l'intégration de filetages borgnes pour garantir une hygiène parfaite lors des cycles de nettoyage automatiques (CIP).
+                                                    </p>
+                                                    <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
+                                                        <h6 className="font-bold text-blue-800 mb-2">Modélisation Dynamique (Python)</h6>
+                                                        <p>Pour générer un flux turbulent, une des lames a été asymétrisée à 55°. Afin de prévenir la destruction du joint d'étanchéité PTFE (Tolérance max : 0.04 mm de déviation), j'ai développé un jumeau numérique en Python :</p>
+                                                        <ul className="list-disc pl-5 mt-2 space-y-1">
+                                                            <li>Modèle de rotor de Jeffcott (1-DOF) combiné aux équations d'Euler-Bernoulli.</li>
+                                                            <li>Intégration de la rhéologie non-newtonienne du fluide (Loi d'Ostwald-de Waele) pour calculer l'amortissement hydrodynamique réel.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-4">
+                                                    <div className="h-48">
+                                                        <ProjectImage src="alberts-cao-blender.jpg" alt="Coupe CAO du Blender V2" placeholderText="[Insérer: alberts-cao-blender.jpg (Ex: Fig 2.2 ou 2.11)]" className="w-full h-full" />
+                                                    </div>
+                                                    <div className="h-48">
+                                                        <ProjectImage src="alberts-python.png" alt="Graphique de résonance Python" placeholderText="[Insérer: alberts-python.png (Ex: Fig 2.17)]" className="w-full h-full" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Focus 2 & 3 : MDU & Maintenance (20%) */}
+                                        <div className="grid md:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
+                                            <div>
+                                                <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
+                                                    <Icon name="code" size={20} className="text-slate-500"/>
+                                                    Projet MDU (Mécatronique)
+                                                </h5>
+                                                <p className="text-sm text-slate-600 mb-4">
+                                                    Conception et validation structurelle de bancs de test pour la nouvelle unité d'entraînement mobile (Motor Drive Unit). Utilisation d'analyses par éléments finis (MEF) sous SolidWorks avec étude de convergence de maillage, suivie d'un prototypage en impression 3D (PLA) sur Bambu Lab.
+                                                </p>
+                                                <div className="h-32">
+                                                    <ProjectImage src="alberts-mdu.jpg" alt="Simulation MEF MDU" placeholderText="[Insérer: alberts-mdu.jpg (Ex: Fig 2.35)]" className="w-full h-full" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
+                                                    <Icon name="tool" size={20} className="text-slate-500"/>
+                                                    Terrain & Maintenance
+                                                </h5>
+                                                <p className="text-sm text-slate-600 mb-4">
+                                                    Déploiement international de machines et réalisation d'analyses des causes racines (RCA) sur des pannes récurrentes du parc. La confrontation avec la réalité du terrain a directement influencé la philosophie "Design for Maintenance" du projet R&D.
+                                                </p>
+                                                <div className="h-32">
+                                                    <ProjectImage src="alberts-maintenance.jpg" alt="Maintenance sur site" placeholderText="[Insérer: alberts-maintenance.jpg (Ex: Fig 2.36)]" className="w-full h-full" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Stats Impact */}
+                                        <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
+                                            <div>
+                                                <p className="text-4xl font-black tracking-tighter text-blue-400">100%</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-1 text-slate-400">Étanchéité validée (120°C)</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-blue-400">-32%</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-1 text-slate-400">Coût d'usinage (DFM)</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-blue-400">25k</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-1 text-slate-400">Tr/min (Validation dynamique)</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                )}
+
+                                {/* CONTENU : REEL */}
+                                {tab === 'reel' && (
+                                    <div className="animate-in fade-in">
+                                        <div className="flex flex-wrap gap-2 mb-8 uppercase text-[9px] font-black tracking-widest">
+                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">VBA Excel</span>
+                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Conception Mécanique</span>
+                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Standardisation</span>
+                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Aéronautique</span>
+                                        </div>
+                                        <h4 className="text-4xl font-black mb-8 tracking-tighter">Stage REEL : Capitalisation & Performance</h4>
+                                        <div className="grid lg:grid-cols-2 gap-12 items-center">
+                                            <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
+                                                <p className="text-lg">Structuration du savoir technique pour faciliter la conception BE et réduire les délais de traitement des processus industriels.</p>
+                                                <ul className="space-y-4 text-sm">
+                                                    <li className="flex gap-4 items-start"><Icon name="settings" size={20} className="text-indigo-600 mt-1 shrink-0"/> <div><strong>Standardisation BE :</strong> Création de guides techniques sur les guidages linéaires et actionneurs, harmonisant les standards EU et USA.</div></li>
+                                                    <li className="flex gap-4 items-start"><Icon name="code" size={20} className="text-indigo-600 mt-1 shrink-0"/> <div><strong>Outils Digitaux :</strong> Automatisation de notes de calcul RDM et générateur de DA via VBA. Gain de temps : <strong>30s au lieu de 10min</strong>.</div></li>
+                                                </ul>
+                                            </div>
+                                            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
+                                                <p className="text-[10px] font-black uppercase text-slate-500 mb-8 tracking-[0.2em] italic">Impact Industriel</p>
+                                                <div className="space-y-10">
+                                                    <div><p className="text-5xl font-black italic tracking-tighter leading-none">30s</p><p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest italic">Temps de calcul RDM optimisé</p></div>
+                                                    <div className="h-px bg-slate-800"></div>
+                                                    <div><p className="text-5xl font-black italic tracking-tighter leading-none underline decoration-indigo-500 decoration-4 underline-offset-8">ISO 12100</p><p className="text-[10px] font-bold text-slate-400 uppercase mt-4 tracking-widest italic">Analyse de risque modulaire</p></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* CONTENU : VOLANT */}
+                                {tab === 'volant' && (
+                                    <div className="animate-in fade-in">
+                                        <div className="flex flex-wrap gap-2 mb-8 uppercase text-[9px] font-black tracking-widest">
+                                            <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Conception CATIA V5</span>
+                                            <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">RDM</span>
+                                            <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Dynamique</span>
+                                        </div>
+                                        <h4 className="text-4xl font-black mb-8 tracking-tighter text-emerald-900">Projet Industriel : Récupération d'Énergie</h4>
+                                        <div className="grid lg:grid-cols-2 gap-12 items-center">
+                                            <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
+                                                <p className="text-lg">Conception d'un volant d'inertie pour stockage d'énergie mécanique, optimisé pour la restitution cinétique au freinage d'un véhicule.</p>
+                                                <div className="bg-emerald-50/50 border border-emerald-100 p-8 rounded-3xl">
+                                                    <h5 className="font-black text-emerald-800 text-[10px] uppercase mb-4 tracking-widest">Justification Technique</h5>
+                                                    <p className="text-sm">Étude du moment d'inertie optimal, calcul des contraintes centrifuges et sélection rigoureuse des matériaux pour maximiser l'énergie massique spécifique.</p>
+                                                </div>
+                                            </div>
+                                            <div className="bg-slate-50 rounded-[2.5rem] border border-slate-100 flex items-center justify-center p-12 shadow-inner min-h-[300px]">
+                                                <Illustration type="volant" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* CONTENU : MEF */}
+                                {tab === 'mef' && (
+                                    <div className="animate-in fade-in">
+                                        <div className="flex flex-wrap gap-2 mb-8 uppercase text-[9px] font-black tracking-widest">
+                                            <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Méthode MEF</span>
+                                            <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Python Numérique</span>
+                                            <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Simulation</span>
+                                        </div>
+                                        <h4 className="text-4xl font-black mb-8 tracking-tighter text-rose-900">Simulation Thermique par MEF</h4>
+                                        <div className="grid lg:grid-cols-2 gap-12 items-center">
+                                            <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
+                                                <p className="text-lg">Modélisation et résolution numérique de l'équation de la chaleur bidimensionnelle pour l'optimisation d'une ailette électronique.</p>
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="bg-white p-5 border border-slate-100 rounded-2xl shadow-sm"><p className="text-[10px] font-black text-rose-600 uppercase mb-3 tracking-widest">Maillage</p><p className="text-sm text-slate-500">Analyse de convergence sur éléments triangulaires et quadrangulaires.</p></div>
+                                                    <div className="bg-white p-5 border border-slate-100 rounded-2xl shadow-sm"><p className="text-[10px] font-black text-rose-600 uppercase mb-3 tracking-widest">Calcul</p><p className="text-sm text-slate-500">Assemblage matriciel et résolution du système via algorithme Python.</p></div>
+                                                </div>
+                                            </div>
+                                            <div className="bg-rose-50 border border-rose-100 rounded-[2.5rem] flex items-center justify-center p-10 shadow-inner min-h-[300px]">
+                                                <Illustration type="thermique" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* BANNIERE COMPÉTENCES */}
+                    <section className="bg-slate-900 text-white py-32 px-8 overflow-hidden relative">
+                        <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-20 relative z-10">
+                            <div>
+                                <h3 className="text-5xl font-black tracking-tighter italic mb-8">Expertise & <br/><span className="text-blue-400">Qualités</span></h3>
+                                <p className="text-slate-400 font-medium italic leading-relaxed text-lg underline decoration-blue-500 decoration-4 underline-offset-8">
+                                    "Traduire des comportements physiques complexes en solutions industrielles viables et manufacturables."
+                                </p>
+                            </div>
+                            <div className="lg:col-span-2 grid sm:grid-cols-2 gap-16">
+                                <div>
+                                    <h4 className="text-[11px] font-black uppercase text-blue-400 tracking-[0.2em] mb-8 italic flex items-center gap-3">
+                                        <span className="w-8 h-px bg-blue-400"></span> Compétences Techniques
+                                    </h4>
+                                    <ul className="space-y-5 text-slate-100 font-bold text-sm">
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> CATIA V5 & SolidWorks (CAO/DFM)</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Simulation Numérique (MEF)</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> RDM & Modélisation Analytique</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Python & VBA Excel</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Prototypage Rapide (Impression 3D)</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Analyse de risque (ISO 12100)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="text-[11px] font-black uppercase text-blue-400 tracking-[0.2em] mb-8 italic flex items-center gap-3">
+                                        <span className="w-8 h-px bg-blue-400"></span> Qualités Opérationnelles
+                                    </h4>
+                                    <ul className="space-y-5 text-slate-100 font-bold text-sm">
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Résolution de problèmes complexes</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Culture du "Design for Maintenance"</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Autonomie R&D en startup</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Communication bilingue technique (FR/EN)</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Adaptabilité et travail d'équipe</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="absolute bottom-0 right-0 w-1/4 h-full bg-blue-600/5 -skew-x-12 translate-x-1/2 pointer-events-none" />
+                    </section>
+
+                    <footer className="mt-24 py-12 border-t border-slate-100 px-8 text-center max-w-7xl mx-auto">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">
+                            <span>Dylan Gay-Tesouro — Polytech Lyon</span>
+                            <span className="text-slate-400 italic">"Simuler pour mieux concevoir"</span>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

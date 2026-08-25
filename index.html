@@ -213,28 +213,36 @@
                                                 Projet Principal : Le Blender V2
                                             </h5>
                                             <div className="grid lg:grid-cols-2 gap-10">
-                                                <div className="space-y-5 text-slate-600 text-sm leading-relaxed">
-                                                    <p>
-                                                        <strong>Défi technique :</strong> L'architecture de première génération utilisait un joint en silicone collé chimiquement qui se dégradait sous l'effet de la vapeur (120°C) et de la haute pression, générant des fuites critiques.
-                                                    </p>
-                                                    <p>
-                                                        <strong>Solution CAO & DFM :</strong> Redesign complet vers une architecture modulaire "sandwich". Le joint est désormais maintenu par pure compression mécanique. Optimisation des pièces pour un usinage CNC en Inox 316L, avec l'intégration de filetages borgnes pour garantir une hygiène parfaite lors des cycles de nettoyage automatiques (CIP).
-                                                    </p>
-                                                    <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
-                                                        <h6 className="font-bold text-blue-800 mb-2">Modélisation Dynamique (Python)</h6>
-                                                        <p>Pour générer un flux turbulent, une des lames a été asymétrisée à 55°. Afin de prévenir la destruction du joint d'étanchéité PTFE (Tolérance max : 0.04 mm de déviation), j'ai développé un jumeau numérique en Python :</p>
-                                                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                                                            <li>Modèle de rotor de Jeffcott (1-DOF) combiné aux équations d'Euler-Bernoulli.</li>
-                                                            <li>Intégration de la rhéologie non-newtonienne du fluide (Loi d'Ostwald-de Waele) pour calculer l'amortissement hydrodynamique réel.</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div className="space-y-4">
-                                                    <ProjectImage src="alberts-cao-blender.jpg" alt="Coupe CAO du Blender V2" />
-                                                    <ProjectImage src="alberts-python.png" alt="Graphique de résonance Python" />
-                                                </div>
-                                            </div>
-                                        </div>
+    {/* COLONNE GAUCHE : Texte + Image Python */}
+    <div className="space-y-5 text-slate-600 text-sm leading-relaxed">
+        <p>
+            <strong>Défi technique :</strong> L'architecture de première génération utilisait un joint en silicone collé chimiquement qui se dégradait sous l'effet de la vapeur (120°C) et de la haute pression, générant des fuites critiques.
+        </p>
+        <p>
+            <strong>Solution CAO & DFM :</strong> Redesign complet vers une architecture modulaire "sandwich". Le joint est désormais maintenu par pure compression mécanique. Optimisation des pièces pour un usinage CNC en Inox 316L, avec l'intégration de filetages borgnes pour garantir une hygiène parfaite lors des cycles de nettoyage automatiques (CIP).
+        </p>
+        <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
+            <h6 className="font-bold text-blue-800 mb-2">Modélisation Dynamique (Python)</h6>
+            <p>Pour générer un flux turbulent, une des lames a été asymétrisée à 55°. Afin de prévenir la destruction du joint d'étanchéité PTFE (Tolérance max : 0.04 mm de déviation), j'ai développé un jumeau numérique en Python :</p>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+                <li>Modèle de rotor de Jeffcott (1-DOF) combiné aux équations d'Euler-Bernoulli.</li>
+                <li>Intégration de la rhéologie non-newtonienne du fluide (Loi d'Ostwald-de Waele) pour calculer l'amortissement hydrodynamique réel.</li>
+            </ul>
+        </div>
+        
+        {/* NOUVEL EMPLACEMENT IMAGE PYTHON */}
+        <div className="pt-2">
+            <ProjectImage src="alberts-python.png" alt="Graphique de résonance Python" />
+        </div>
+    </div>
+
+    {/* COLONNE DROITE : Image CAO réduite et centrée */}
+    <div className="flex items-center justify-center">
+        <div className="w-3/4 lg:w-2/3">
+            <ProjectImage src="alberts-cao-blender.jpg" alt="Coupe CAO du Blender V2" />
+        </div>
+    </div>
+</div>
 
                                         {/* Focus 2 & 3 : MDU & Maintenance (20%) */}
                                         <div className="grid md:grid-cols-2 gap-10 border-t border-slate-100 pt-10">

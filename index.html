@@ -116,14 +116,13 @@
         };
 
         // Composant pour gérer l'affichage conditionnel des vraies images vs placeholders
-        const ProjectImage = ({ src, alt, placeholderText, className = "" }) => {
+       const ProjectImage = ({ src, alt, placeholderText, className = "" }) => {
             return (
-                <div className={`relative overflow-hidden rounded-2xl ${className} image-placeholder`} style={{ backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    {/* Le texte disparaît virtuellement si l'image se charge grâce au background */}
-                    <span className="bg-white/80 px-4 py-2 rounded shadow-sm backdrop-blur-sm z-10 pointer-events-none">
+                <div className={`relative overflow-hidden rounded-2xl ${className} image-placeholder`} style={{ backgroundImage: `url(${src})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+                    <span className="bg-white/80 px-4 py-2 rounded shadow-sm backdrop-blur-sm z-10 pointer-events-none text-xs">
                         {placeholderText}
                     </span>
-                    <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-cover opacity-0" onError={(e) => e.target.style.display = 'none'} onLoad={(e) => { e.target.style.opacity = 1; e.target.previousSibling.style.display = 'none'; e.target.parentElement.style.backgroundColor = 'transparent'; e.target.parentElement.style.border = 'none'; }} />
+                    <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-contain opacity-0" onError={(e) => e.target.style.display = 'none'} onLoad={(e) => { e.target.style.opacity = 1; e.target.previousSibling.style.display = 'none'; e.target.parentElement.style.backgroundColor = 'transparent'; e.target.parentElement.style.border = 'none'; }} />
                 </div>
             );
         };

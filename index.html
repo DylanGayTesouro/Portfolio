@@ -17,25 +17,6 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Style pour les placeholders d'images en attendant les vraies */
-        .image-placeholder {
-            background-color: #f1f5f9;
-            border: 2px dashed #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #64748b;
-            font-weight: 600;
-            font-size: 0.875rem;
-            padding: 1rem;
-        }
-        .image-placeholder img {
-            opacity: 0; /* Cache l'icone de l'image brisée si src vide */
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
     </style>
 </head>
 <body class="bg-[#FDFDFF] text-slate-900 overflow-x-hidden">
@@ -54,7 +35,6 @@
                 ),
                 code: <polyline points="16 18 22 12 16 6 8 6 2 12 8 18"/>,
                 tool: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>,
-                thermometer: <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>,
                 mail: (
                     <>
                         <rect width="20" height="16" x="2" y="4" rx="2"/>
@@ -79,8 +59,7 @@
                         <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
                         <path d="M6 12v5c3 3 9 3 12 0v-5"/>
                     </>
-                ),
-                activity: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                )
             };
             return (
                 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -115,14 +94,11 @@
             return null;
         };
 
-        // Composant pour gérer l'affichage conditionnel des vraies images vs placeholders
-       const ProjectImage = ({ src, alt, placeholderText, className = "" }) => {
+        // Composant d'image simplifié qui s'adapte à la taille naturelle de l'image
+        const ProjectImage = ({ src, alt }) => {
             return (
-                <div className={`relative overflow-hidden rounded-2xl ${className} image-placeholder`} style={{ backgroundImage: `url(${src})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
-                    <span className="bg-white/80 px-4 py-2 rounded shadow-sm backdrop-blur-sm z-10 pointer-events-none text-xs">
-                        {placeholderText}
-                    </span>
-                    <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-contain opacity-0" onError={(e) => e.target.style.display = 'none'} onLoad={(e) => { e.target.style.opacity = 1; e.target.previousSibling.style.display = 'none'; e.target.parentElement.style.backgroundColor = 'transparent'; e.target.parentElement.style.border = 'none'; }} />
+                <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-slate-50">
+                    <img src={src} alt={alt} className="w-full h-auto object-contain" />
                 </div>
             );
         };
@@ -167,7 +143,7 @@
                     <section className="bg-slate-50/30 py-24 px-8">
                         <div className="max-w-7xl mx-auto">
                             
-                            {/* GRILLE 1 : STAGES (2 boutons) */}
+                            {/* GRILLE 1 : STAGES */}
                             <div className="mb-12">
                                 <div className="flex items-center gap-4 mb-8">
                                     <Icon name="briefcase" className="text-indigo-600" size={28}/>
@@ -187,7 +163,7 @@
                                 </div>
                             </div>
 
-                            {/* GRILLE 2 : PROJETS ACADÉMIQUES (2 boutons) */}
+                            {/* GRILLE 2 : PROJETS ACADÉMIQUES */}
                             <div className="mb-16">
                                 <div className="flex items-center gap-4 mb-8">
                                     <Icon name="graduation" className="text-emerald-600" size={28}/>
@@ -225,8 +201,8 @@
                                                 <h4 className="text-4xl font-black tracking-tighter text-slate-900 leading-tight">Conception et Industrialisation d'un Module de Mixage Automatisé</h4>
                                                 <p className="text-blue-600 font-bold mt-2">Alberts N.V. (Belgique) — Startup Robotique FoodTech</p>
                                             </div>
-                                            <div className="hidden md:block w-1/3 shrink-0 h-40">
-                                                <ProjectImage src="alberts-machine.png" alt="Machine Alberts" placeholderText="[Insérer: alberts-machine.jpg]" className="w-full h-full" />
+                                            <div className="hidden md:block w-1/3 shrink-0">
+                                                <ProjectImage src="alberts-machine.png" alt="Machine Alberts" />
                                             </div>
                                         </div>
 
@@ -254,12 +230,8 @@
                                                     </div>
                                                 </div>
                                                 <div className="space-y-4">
-                                                    <div className="h-48">
-                                                        <ProjectImage src="alberts-cao-blender.jpg" alt="Coupe CAO du Blender V2" placeholderText="[Insérer: alberts-cao-blender.jpg (Ex: Fig 2.2 ou 2.11)]" className="w-full h-full" />
-                                                    </div>
-                                                    <div className="h-48">
-                                                        <ProjectImage src="alberts-python.png" alt="Graphique de résonance Python" placeholderText="[Insérer: alberts-python.png (Ex: Fig 2.17)]" className="w-full h-full" />
-                                                    </div>
+                                                    <ProjectImage src="alberts-cao-blender.jpg" alt="Coupe CAO du Blender V2" />
+                                                    <ProjectImage src="alberts-python.png" alt="Graphique de résonance Python" />
                                                 </div>
                                             </div>
                                         </div>
@@ -274,9 +246,7 @@
                                                 <p className="text-sm text-slate-600 mb-4">
                                                     Conception et validation structurelle de bancs de test pour la nouvelle unité d'entraînement mobile (Motor Drive Unit). Utilisation d'analyses par éléments finis (MEF) sous SolidWorks avec étude de convergence de maillage, suivie d'un prototypage en impression 3D (PLA) sur Bambu Lab.
                                                 </p>
-                                                <div className="h-32">
-                                                    <ProjectImage src="alberts-mdu.png" alt="Simulation MEF MDU" placeholderText="[Insérer: alberts-mdu.jpg (Ex: Fig 2.35)]" className="w-full h-full" />
-                                                </div>
+                                                <ProjectImage src="alberts-mdu.png" alt="Simulation MEF MDU" />
                                             </div>
                                             <div>
                                                 <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
@@ -444,4 +414,4 @@
         root.render(<App />);
     </script>
 </body>
-</html> 
+</html>

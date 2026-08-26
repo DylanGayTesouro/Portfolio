@@ -404,27 +404,113 @@
 
                                     </div>
                                 )}
-                                {/* CONTENU : VOLANT */}
+                                {/* CONTENU : PROJET INDUSTRIEL (RÉCUPÉRATION D'ÉNERGIE) */}
                                 {tab === 'volant' && (
-                                    <div className="animate-in fade-in">
-                                        <div className="flex flex-wrap gap-2 mb-8 uppercase text-[9px] font-black tracking-widest">
-                                            <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Conception CATIA V5</span>
-                                            <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">RDM</span>
-                                            <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Dynamique</span>
+                                    <div className="animate-in fade-in space-y-12">
+                                        
+                                        {/* EN-TÊTE SÉPARÉ */}
+                                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+                                            <div className="w-full lg:w-3/5">
+                                                <div className="flex flex-wrap gap-2 mb-6 uppercase text-[9px] font-black tracking-widest">
+                                                    <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Étude Comparative</span>
+                                                    <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Modélisation Numérique</span>
+                                                    <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">Thermodynamique</span>
+                                                    <span className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded">RDM</span>
+                                                </div>
+                                                <h4 className="text-4xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight mb-4">
+                                                    Étude Multiphysique de Systèmes de Récupération d'Énergie (KERS)
+                                                </h4>
+                                                <p className="text-emerald-600 font-bold">Projet Industriel R&amp;D — Polytech Lyon</p>
+                                            </div>
+                                            <div className="w-full lg:w-2/5 flex justify-center">
+                                                <img 
+                                                    src="projet-recuperation.png" 
+                                                    alt="Concepts de récupération d'énergie" 
+                                                    className="w-full max-w-sm h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500" 
+                                                    onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'%3E%3C/path%3E%3C/svg%3E"; e.target.className="w-32 h-32 opacity-20"; }}
+                                                />
+                                            </div>
                                         </div>
-                                        <h4 className="text-4xl font-black mb-8 tracking-tighter text-emerald-900">Projet Industriel : Récupération d'Énergie</h4>
-                                        <div className="grid lg:grid-cols-2 gap-12 items-center">
-                                            <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
-                                                <p className="text-lg">Conception d'un volant d'inertie pour stockage d'énergie mécanique, optimisé pour la restitution cinétique au freinage d'un véhicule.</p>
-                                                <div className="bg-emerald-50/50 border border-emerald-100 p-8 rounded-3xl">
-                                                    <h5 className="font-black text-emerald-800 text-[10px] uppercase mb-4 tracking-widest">Justification Technique</h5>
-                                                    <p className="text-sm">Étude du moment d'inertie optimal, calcul des contraintes centrifuges et sélection rigoureuse des matériaux pour maximiser l'énergie massique spécifique.</p>
+
+                                        {/* INTRODUCTION & ÉLIMINATION */}
+                                        <div className="border-t border-slate-100 pt-10">
+                                            <h5 className="text-xl font-black uppercase text-slate-800 mb-6 flex items-center gap-3">
+                                                <Icon name="tool" size={24} className="text-emerald-500"/>
+                                                1. La Démarche : Preuve Analytique et Impasse Élastique
+                                            </h5>
+                                            <div className="text-slate-600 text-sm leading-relaxed space-y-4">
+                                                <p>
+                                                    <strong>Problématique :</strong> Dimensionner un système 100 % mécanique pour récupérer l'énergie de freinage (50 à 0 km/h) d'une citadine de 1000 kg. L'objectif cible était de 500 kJ sous de fortes contraintes de masse (&lt; 100 kg) et d'intégration.
+                                                </p>
+                                                <div className="bg-rose-50/50 border border-rose-100 p-6 rounded-2xl">
+                                                    <h6 className="font-bold text-rose-800 mb-2">Preuve de concept : L'élimination des ressorts</h6>
+                                                    <p>Historiquement envisagée, l'accumulation par ressorts a été la première piste explorée. J'ai développé un outil de dimensionnement RDM qui a mathématiquement prouvé l'impossibilité de cette solution[cite: 2] :</p>
+                                                    <ul className="list-disc pl-5 mt-2 space-y-1 text-rose-900/80">
+                                                        <li>Pour atteindre 500 kJ, la contrainte de cisaillement interne dépasserait massivement la limite élastique (Von Mises) des meilleurs aciers (462 MPa)[cite: 2].</li>
+                                                        <li>L'optimisation du ratio poids/puissance plafonnait à 63,6 J/kg[cite: 2]. Pour atteindre l'objectif, il aurait fallu embarquer près de 7,9 tonnes de ressorts[cite: 2].</li>
+                                                    </ul>
+                                                    <p className="mt-2 font-medium">L'approche élastique ayant été écartée par le calcul, le projet s'est concentré sur deux technologies viables : l'inertie et la thermodynamique[cite: 2].</p>
                                                 </div>
                                             </div>
-                                            <div className="bg-slate-50 rounded-[2.5rem] border border-slate-100 flex items-center justify-center p-12 shadow-inner min-h-[300px]">
-                                                <Illustration type="volant" />
+                                        </div>
+
+                                        {/* DEUX TECHNOLOGIES EXPLORÉES */}
+                                        <div className="grid lg:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
+                                            
+                                            {/* COLONNE GAUCHE : Volant d'inertie */}
+                                            <div className="space-y-6">
+                                                <h5 className="text-lg font-black uppercase text-slate-800 flex items-center gap-2">
+                                                    <Icon name="settings" size={20} className="text-emerald-500"/>
+                                                    Voie A : Le KERS Mécanique (Volant d'Inertie)
+                                                </h5>
+                                                <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+                                                    <p>
+                                                        Conception d'un module de stockage cinétique haute densité. Pour éviter l'éclatement du rotor (1,27 GPa de contrainte au centre pour un disque acier), j'ai opté pour une architecture hybride Acier/Carbone[cite: 2].
+                                                    </p>
+                                                    <ul className="list-disc pl-5 space-y-2">
+                                                        <li><strong>Dimensionnement :</strong> Rotor fretté carbone de 10,85 kg tournant à 40 000 tr/min, permettant d'atteindre les 563 kJ ciblés[cite: 2].</li>
+                                                        <li><strong>Modélisation Fluide :</strong> Calcul des pertes aérodynamiques en régime turbulent[cite: 2]. Mise en évidence de la nécessité d'une enceinte sous vide (10 mbar) pour réduire les pertes par traînée de 60 % à 3,5 % sur 2 minutes[cite: 2].</li>
+                                                        <li><strong>Simulation Python :</strong> Développement d'un solveur pour simuler les cycles de charge/décharge. Modélisation d'une transmission incluant un variateur toroïdal (CVT) et une boîte 2 rapports pour gérer une démultiplication extrême allant de 15 à 450[cite: 2].</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            {/* COLONNE DROITE : Pneumatique & Cogénération */}
+                                            <div className="space-y-6">
+                                                <h5 className="text-lg font-black uppercase text-slate-800 flex items-center gap-2">
+                                                    <Icon name="activity" size={20} className="text-emerald-500"/>
+                                                    Voie B : Hybrid-Air &amp; Cogénération
+                                                </h5>
+                                                <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+                                                    <p>
+                                                        Étude d'un système pneumatique utilisant un compresseur à pistons radiaux (soupapes électromagnétiques "Camless") pour stocker l'air à 35 bar dans des réservoirs de 160 L[cite: 2].
+                                                    </p>
+                                                    <ul className="list-disc pl-5 space-y-2">
+                                                        <li><strong>Structure (ASME) :</strong> Dimensionnement des réservoirs cylindriques (épaisseur 5,42 mm en acier, substitution recommandée par du composite pour respecter la limite des 100 kg)[cite: 2].</li>
+                                                        <li><strong>Thermodynamique :</strong> Identification du problème de chauffe adiabatique (555°C théorique)[cite: 2]. Intégration d'un refroidissement actif et d'une pression résiduelle (5 bar) pour fluidifier la détente[cite: 2].</li>
+                                                        <li><strong>Cogénération (Le point clé) :</strong> Ajout d'un échangeur thermique sur la ligne d'échappement[cite: 2]. En réchauffant l'air stocké à 320°C avant sa détente dans le moteur, on double le travail mécanique restitué aux roues (de 111 kJ à 225 kJ), transformant le système en véritable propulseur urbain[cite: 2].</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        {/* Stats Impact */}
+                                        <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
+                                            <div>
+                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">40k</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Tr/min (Conception Hybride)</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">-94%</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">De pertes aéro (Enceinte à 10 mbar)</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">+100%</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">De travail restitué (Cogénération)</p>
                                             </div>
                                         </div>
+
                                     </div>
                                 )}
 

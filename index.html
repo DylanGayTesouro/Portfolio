@@ -132,8 +132,8 @@
                             </h2>
                             <div className="space-y-6">
                                 <p className="text-xl text-slate-500 font-medium leading-relaxed italic border-l-4 border-indigo-500 pl-6">
-                                    Élève-Ingénieur en Génie Mécanique à Polytech Lyon. 
-                                    Ce document compile mes expériences en développement de produits industriels (R&D, optimisation numérique, DFM) et mes projets de modélisation analytique.
+                                    Ingénieur en Calcul Mécanique. 
+                                    Ce document compile mes différentes experiences industrielles ainsi que mes projets académiques.
                                 </p>
                             </div>
                         </div>
@@ -152,12 +152,12 @@
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <button onClick={() => setTab('alberts')} className={`p-8 rounded-[2rem] border-2 text-left transition-all h-full ${tab === 'alberts' ? 'bg-white border-blue-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-200'}`}>
                                         <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest block mb-2">Mars — Août 2026</span>
-                                        <h4 className="font-black uppercase text-base leading-tight mb-2">R&D Robotique & Mécatronique</h4>
+                                        <h4 className="font-black uppercase text-base leading-tight mb-2">R&D Calculs et Mécatronique</h4>
                                         <p className="text-xs text-slate-400 font-bold uppercase tracking-tight">Stage Fin d'Études — Alberts N.V.</p>
                                     </button>
                                     <button onClick={() => setTab('reel')} className={`p-8 rounded-[2rem] border-2 text-left transition-all h-full ${tab === 'reel' ? 'bg-white border-indigo-600 shadow-xl scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-200'}`}>
                                         <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest block mb-2">Mars — Juillet 2025</span>
-                                        <h4 className="font-black uppercase text-base leading-tight mb-2">Base de connaissance RDM</h4>
+                                        <h4 className="font-black uppercase text-base leading-tight mb-2">Base de connaissance</h4>
                                         <p className="text-xs text-slate-400 font-bold uppercase tracking-tight">Stage 4A — REEL International</p>
                                     </button>
                                 </div>
@@ -206,63 +206,58 @@
                                             </div>
                                         </div>
 
-                                        {/* Focus 1 : Blender V2 (80%) */}
+                                        {/* Focus 1 : R&D et Modélisation (80%) */}
                                         <div className="border-t border-slate-100 pt-10">
                                             <h5 className="text-xl font-black uppercase text-slate-800 mb-6 flex items-center gap-3">
                                                 <Icon name="settings" size={24} className="text-blue-500"/>
-                                                Projet Principal : Le Blender V2
+                                                Projet Principal : Conception du Module de Mixage
                                             </h5>
+                                            
                                             <div className="grid lg:grid-cols-2 gap-10">
-                                                {/* COLONNE GAUCHE : Texte + Image Python */}
+                                                {/* COLONNE GAUCHE : Mécanique & DFM */}
                                                 <div className="space-y-5 text-slate-600 text-sm leading-relaxed">
                                                     <p>
-                                                        <strong>Défi technique :</strong> L'architecture de première génération utilisait un joint en silicone collé chimiquement qui se dégradait sous l'effet de la vapeur (120°C) et de la haute pression, générant des fuites critiques.
+                                                        <strong>Défi industriel :</strong> Résolution de défaillances critiques d'étanchéité sur un sous-système soumis à de très fortes contraintes thermiques et de pression en milieu alimentaire (normes d'hygiène strictes).
                                                     </p>
                                                     <p>
-                                                        <strong>Solution CAO & DFM :</strong> Redesign complet vers une architecture modulaire "sandwich". Le joint est désormais maintenu par pure compression mécanique. Optimisation des pièces pour un usinage CNC en Inox 316L, avec l'intégration de filetages borgnes pour garantir une hygiène parfaite lors des cycles de nettoyage automatiques (CIP).
+                                                        <strong>Solution Mécanique & DFM :</strong> Refonte totale de l'architecture pour éliminer les liaisons chimiques au profit d'une étanchéité par compression purement mécanique. La conception a été entièrement pensée pour l'usinage CNC, intégrant les contraintes de nettoyabilité automatisée (Clean-In-Place) tout en réduisant les coûts de fabrication de <strong>32 %</strong> à grande échelle.
                                                     </p>
-                                                    <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
-                                                        <h6 className="font-bold text-blue-800 mb-2">Modélisation Dynamique (Python)</h6>
-                                                        <p>Pour générer un flux turbulent, une des lames a été asymétrisée à 55°. Afin de prévenir la destruction du joint d'étanchéité PTFE (Tolérance max : 0.04 mm de déviation), j'ai développé un jumeau numérique en Python :</p>
-                                                        <ul className="list-disc pl-5 mt-2 space-y-1">
-                                                            <li>Modèle de rotor de Jeffcott (1-DOF) combiné aux équations d'Euler-Bernoulli.</li>
-                                                            <li>Intégration de la rhéologie non-newtonienne du fluide (Loi d'Ostwald-de Waele) pour calculer l'amortissement hydrodynamique réel.</li>
-                                                        </ul>
-                                                    </div>
-                                                    
-                                                    {/* NOUVEL EMPLACEMENT IMAGE PYTHON */}
-                                                    <div className="pt-2">
-                                                        <ProjectImage src="alberts-python.png" alt="Graphique de résonance Python" />
-                                                    </div>
                                                 </div>
-                                            
-                                                {/* COLONNE DROITE : Image CAO réduite et centrée */}
-                                                <div className="flex items-center justify-center">
-                                                    <div className="w-3/4 lg:w-2/3">
-                                                        <ProjectImage src="alberts-cao-blender.jpg" alt="Coupe CAO du Blender V2" />
-                                                    </div>
+
+                                                {/* COLONNE DROITE : Modélisation Python */}
+                                                <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl h-fit">
+                                                    <h6 className="font-bold text-blue-800 mb-3 flex items-center gap-2">
+                                                        <Icon name="code" size={18} className="text-blue-600"/>
+                                                        Jumeau Numérique & Dynamique (Python)
+                                                    </h6>
+                                                    <p className="text-sm text-slate-600 mb-3">Pour optimiser la géométrie de coupe sans risquer la destruction des joints dynamiques à très haute vitesse (tolérances sub-millimétriques), j'ai développé un solveur numérique sur-mesure :</p>
+                                                    <ul className="list-disc pl-5 space-y-2 text-sm text-slate-600">
+                                                        <li>Modélisation analytique des vibrations et de la flexion de l'arbre moteur.</li>
+                                                        <li>Intégration de la rhéologie des fluides complexes (non-newtoniens) pour calculer précisément l'amortissement hydrodynamique en conditions réelles.</li>
+                                                        <li>Définition des limites mathématiques de sécurité du système avant rupture.</li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Focus 2 & 3 : MDU & Maintenance (20%) */}
+
+                                        {/* Focus 2 & 3 : Mécatronique & Maintenance (20%) */}
                                         <div className="grid md:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
                                             <div>
                                                 <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
-                                                    <Icon name="code" size={20} className="text-slate-500"/>
-                                                    Projet MDU (Mécatronique)
+                                                    <Icon name="tool" size={20} className="text-slate-500"/>
+                                                    Bancs de Test (Mécatronique)
                                                 </h5>
-                                                <p className="text-sm text-slate-600 mb-4">
-                                                    Conception et validation structurelle de bancs de test pour la nouvelle unité d'entraînement mobile (Motor Drive Unit). Utilisation d'analyses par éléments finis (MEF) sous SolidWorks avec étude de convergence de maillage, suivie d'un prototypage en impression 3D (PLA) sur Bambu Lab.
+                                                <p className="text-sm text-slate-600">
+                                                    Conception, analyse et fabrication de bancs d'essais pour valider de nouvelles cinématiques d'entraînement. Utilisation de la simulation par éléments finis (MEF) pour valider la rigidité structurelle des pièces, suivie d'un prototypage itératif en impression 3D.
                                                 </p>
-                                                <ProjectImage src="alberts-mdu.png" alt="Simulation MEF MDU" />
                                             </div>
                                             <div>
                                                 <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
-                                                    <Icon name="tool" size={20} className="text-slate-500"/>
-                                                    Terrain & Maintenance
+                                                    <Icon name="activity" size={20} className="text-slate-500"/>
+                                                    Ingénierie Terrain & RCA
                                                 </h5>
-                                                <p className="text-sm text-slate-600 mb-4">
-                                                    Déploiement international de machines et réalisation d'analyses des causes racines (RCA) sur des pannes récurrentes du parc. La confrontation avec la réalité du terrain a directement influencé la philosophie "Design for Maintenance" du projet R&D.
+                                                <p className="text-sm text-slate-600">
+                                                    Participation au déploiement de machines à l'international et réalisation d'analyses de causes racines (Root Cause Analysis) sur des pannes d'usure prématurée. Ces données terrain ont directement alimenté l'approche "Design for Maintenance" du bureau d'études.
                                                 </p>
                                             </div>
                                         </div>
@@ -270,21 +265,18 @@
                                         {/* Stats Impact */}
                                         <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
                                             <div>
-                                                <p className="text-4xl font-black tracking-tighter text-blue-400">100%</p>
-                                                <p className="text-xs font-bold uppercase tracking-widest mt-1 text-slate-400">Étanchéité validée (120°C)</p>
+                                                <p className="text-4xl font-black tracking-tighter text-blue-400">Fiable</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Étanchéité sous pression</p>
                                             </div>
                                             <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
                                                 <p className="text-4xl font-black tracking-tighter text-blue-400">-32%</p>
-                                                <p className="text-xs font-bold uppercase tracking-widest mt-1 text-slate-400">Coût d'usinage (DFM)</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Coûts de fabrication</p>
                                             </div>
                                             <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
-                                                <p className="text-4xl font-black tracking-tighter text-blue-400">25k</p>
-                                                <p className="text-xs font-bold uppercase tracking-widest mt-1 text-slate-400">Tr/min (Validation dynamique)</p>
+                                                <p className="text-4xl font-black tracking-tighter text-blue-400">Sécure</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Limites dynamiques</p>
                                             </div>
                                         </div>
-
-                                    </div>
-                                )}
 
                                 {/* CONTENU : REEL */}
                                 {tab === 'reel' && (

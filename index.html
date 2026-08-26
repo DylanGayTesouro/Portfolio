@@ -35,6 +35,7 @@
                 ),
                 code: <polyline points="16 18 22 12 16 6 8 6 2 12 8 18"/>,
                 tool: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>,
+                activity: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>,
                 mail: (
                     <>
                         <rect width="20" height="16" x="2" y="4" rx="2"/>
@@ -94,7 +95,7 @@
             return null;
         };
 
-        // Composant d'image simplifié qui s'adapte à la taille naturelle de l'image
+        // Composant d'image simplifié
         const ProjectImage = ({ src, alt }) => {
             return (
                 <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-slate-50">
@@ -133,7 +134,7 @@
                             <div className="space-y-6">
                                 <p className="text-xl text-slate-500 font-medium leading-relaxed italic border-l-4 border-indigo-500 pl-6">
                                     Ingénieur en Calcul Mécanique. 
-                                    Ce document compile mes différentes experiences industrielles ainsi que mes projets académiques.
+                                    Ce document compile mes différentes expériences industrielles ainsi que mes projets académiques.
                                 </p>
                             </div>
                         </div>
@@ -220,7 +221,7 @@
                                                         <strong>Défi industriel :</strong> Résolution de défaillances critiques d'étanchéité sur un sous-système soumis à de très fortes contraintes thermiques et de pression en milieu alimentaire (normes d'hygiène strictes).
                                                     </p>
                                                     <p>
-                                                        <strong>Solution Mécanique & DFM :</strong> Refonte totale de l'architecture pour éliminer les liaisons chimiques au profit d'une étanchéité par compression purement mécanique. La conception a été entièrement pensée pour l'usinage CNC, intégrant les contraintes de nettoyabilité automatisée (Clean-In-Place) tout en réduisant les coûts de fabrication de <strong>32 %</strong> à grande échelle.
+                                                        <strong>Solution Mécanique &amp; DFM :</strong> Refonte totale de l'architecture pour éliminer les liaisons chimiques au profit d'une étanchéité par compression purement mécanique. La conception a été entièrement pensée pour l'usinage CNC, intégrant les contraintes de nettoyabilité automatisée (Clean-In-Place) tout en réduisant les coûts de fabrication de <strong>32 %</strong> à grande échelle.
                                                     </p>
                                                 </div>
 
@@ -228,7 +229,7 @@
                                                 <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl h-fit">
                                                     <h6 className="font-bold text-blue-800 mb-3 flex items-center gap-2">
                                                         <Icon name="code" size={18} className="text-blue-600"/>
-                                                        Jumeau Numérique & Dynamique (Python)
+                                                        Jumeau Numérique &amp; Dynamique (Python)
                                                     </h6>
                                                     <p className="text-sm text-slate-600 mb-3">Pour optimiser la géométrie de coupe sans risquer la destruction des joints dynamiques à très haute vitesse (tolérances sub-millimétriques), j'ai développé un solveur numérique sur-mesure :</p>
                                                     <ul className="list-disc pl-5 space-y-2 text-sm text-slate-600">
@@ -239,6 +240,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         {/* Focus 2 & 3 : Mécatronique & Maintenance (20%) */}
                                         <div className="grid md:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
                                             <div>
@@ -253,7 +255,7 @@
                                             <div>
                                                 <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
                                                     <Icon name="activity" size={20} className="text-slate-500"/>
-                                                    Ingénierie Terrain & RCA
+                                                    Ingénierie Terrain &amp; RCA
                                                 </h5>
                                                 <p className="text-sm text-slate-600">
                                                     Participation au déploiement de machines à l'international et réalisation d'analyses de causes racines (Root Cause Analysis) sur des pannes d'usure prématurée. Ces données terrain ont directement alimenté l'approche "Design for Maintenance" du bureau d'études.
@@ -276,6 +278,9 @@
                                                 <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Limites dynamiques</p>
                                             </div>
                                         </div>
+
+                                    </div>
+                                )}
 
                                 {/* CONTENU : REEL */}
                                 {tab === 'reel' && (
@@ -374,10 +379,10 @@
                                         <span className="w-8 h-px bg-blue-400"></span> Compétences Techniques
                                     </h4>
                                     <ul className="space-y-5 text-slate-100 font-bold text-sm">
-                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> CATIA V5 & SolidWorks (CAO/DFM)</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> CATIA V5 &amp; SolidWorks (CAO/DFM)</li>
                                         <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Simulation Numérique (MEF)</li>
-                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> RDM & Modélisation Analytique</li>
-                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Python & VBA Excel</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> RDM &amp; Modélisation Analytique</li>
+                                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Python &amp; VBA Excel</li>
                                         <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Prototypage Rapide (Impression 3D)</li>
                                         <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> Analyse de risque (ISO 12100)</li>
                                     </ul>

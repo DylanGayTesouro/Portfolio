@@ -299,34 +299,111 @@
 
                                 {/* CONTENU : REEL */}
                                 {tab === 'reel' && (
-                                    <div className="animate-in fade-in">
-                                        <div className="flex flex-wrap gap-2 mb-8 uppercase text-[9px] font-black tracking-widest">
-                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">VBA Excel</span>
-                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Conception Mécanique</span>
-                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Standardisation</span>
-                                            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Aéronautique</span>
-                                        </div>
-                                        <h4 className="text-4xl font-black mb-8 tracking-tighter">Stage REEL : Capitalisation & Performance</h4>
-                                        <div className="grid lg:grid-cols-2 gap-12 items-center">
-                                            <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
-                                                <p className="text-lg">Structuration du savoir technique pour faciliter la conception BE et réduire les délais de traitement des processus industriels.</p>
-                                                <ul className="space-y-4 text-sm">
-                                                    <li className="flex gap-4 items-start"><Icon name="settings" size={20} className="text-indigo-600 mt-1 shrink-0"/> <div><strong>Standardisation BE :</strong> Création de guides techniques sur les guidages linéaires et actionneurs, harmonisant les standards EU et USA.</div></li>
-                                                    <li className="flex gap-4 items-start"><Icon name="code" size={20} className="text-indigo-600 mt-1 shrink-0"/> <div><strong>Outils Digitaux :</strong> Automatisation de notes de calcul RDM et générateur de DA via VBA. Gain de temps : <strong>30s au lieu de 10min</strong>.</div></li>
-                                                </ul>
+                                    <div className="animate-in fade-in space-y-12">
+                                        
+                                        {/* EN-TÊTE SÉPARÉ (TEXTE 60% / IMAGE SANS CADRE 40%) */}
+                                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+                                            
+                                            {/* Partie gauche : Texte (60%) */}
+                                            <div className="w-full lg:w-3/5">
+                                                <div className="flex flex-wrap gap-2 mb-6 uppercase text-[9px] font-black tracking-widest">
+                                                    <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">RDM & Poutres</span>
+                                                    <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">VBA Excel</span>
+                                                    <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">Standardisation BE</span>
+                                                    <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded">ISO 12100</span>
+                                                </div>
+                                                <h4 className="text-4xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight mb-4">
+                                                    Structuration du Savoir Technique et Outils de Dimensionnement
+                                                </h4>
+                                                <p className="text-indigo-600 font-bold">REEL (France) — Équipements de Levage Aéronautique</p>
                                             </div>
-                                            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
-                                                <p className="text-[10px] font-black uppercase text-slate-500 mb-8 tracking-[0.2em] italic">Impact Industriel</p>
-                                                <div className="space-y-10">
-                                                    <div><p className="text-5xl font-black italic tracking-tighter leading-none">30s</p><p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest italic">Temps de calcul RDM optimisé</p></div>
-                                                    <div className="h-px bg-slate-800"></div>
-                                                    <div><p className="text-5xl font-black italic tracking-tighter leading-none underline decoration-indigo-500 decoration-4 underline-offset-8">ISO 12100</p><p className="text-[10px] font-bold text-slate-400 uppercase mt-4 tracking-widest italic">Analyse de risque modulaire</p></div>
+
+                                            {/* Partie droite : Image libre (40%) */}
+                                            <div className="w-full lg:w-2/5 flex justify-center">
+                                                <img 
+                                                    src="reel-illustration.png" 
+                                                    alt="Illustration Guidage REEL" 
+                                                    className="w-full max-w-sm h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500" 
+                                                    onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'%3E%3C/path%3E%3C/svg%3E"; e.target.className="w-32 h-32 opacity-20"; }}
+                                                />
+                                            </div>
+                                            
+                                        </div>
+
+                                        {/* Focus 1 : Standardisation & RDM (80%) */}
+                                        <div className="border-t border-slate-100 pt-10">
+                                            <h5 className="text-xl font-black uppercase text-slate-800 mb-6 flex items-center gap-3">
+                                                <Icon name="settings" size={24} className="text-indigo-500"/>
+                                                Projet Principal : Ingénierie de la Connaissance & Guidages
+                                            </h5>
+                                            
+                                            <div className="grid lg:grid-cols-2 gap-10">
+                                                {/* COLONNE GAUCHE : Démarche BE */}
+                                                <div className="space-y-5 text-slate-600 text-sm leading-relaxed">
+                                                    <p>
+                                                        <strong>Défi industriel :</strong> Face à la complexité croissante des équipements aéronautiques, le bureau d'études (BE) souffrait d'une dispersion des retours d'expérience. Il fallait harmoniser les pratiques de conception pour gagner en fiabilité et réduire les temps de développement.
+                                                    </p>
+                                                    <p>
+                                                        <strong>Solution & Démarche :</strong> Création d'un socle technique standardisé (Garde-corps, Actionneurs, Guidages). J'ai notamment conçu une matrice de décision multicritères pour les systèmes de guidage (galets combinés, rails, patins), couplée à une base de données répertoriant les architectures CAO validées sur les projets passés pour favoriser la réutilisation.
+                                                    </p>
+                                                </div>
+
+                                                {/* COLONNE DROITE : Outil de Calcul */}
+                                                <div className="bg-indigo-50/50 border border-indigo-100 p-6 rounded-2xl h-fit">
+                                                    <h6 className="font-bold text-indigo-800 mb-4 flex items-center gap-2">
+                                                        <Icon name="code" size={18} className="text-indigo-600"/>
+                                                        Note de calcul automatisée (RDM)
+                                                    </h6>
+                                                    <p className="text-sm text-slate-600 mb-4">Pour sécuriser le pré-dimensionnement des grands tiroirs mobiles, j'ai développé un outil de calcul interactif :</p>
+                                                    <ul className="list-disc pl-5 space-y-3 text-sm text-slate-600">
+                                                        <li><strong>Théorie des poutres :</strong> Modélisation de la déformée (flèche) et calcul de l'inertie minimale requise selon la position des charges embarquées.</li>
+                                                        <li><strong>Modèle statistique :</strong> Intégration d'une régression linéaire basée sur les données historiques pour estimer la masse propre de la structure avant sa conception CAO.</li>
+                                                        <li><strong>Validation :</strong> Restitution immédiate des coefficients de sécurité et taux de charge des galets.</li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Focus 2 & 3 : Analyse de risque & Process (20%) */}
+                                        <div className="grid md:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
+                                            <div>
+                                                <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
+                                                    <Icon name="tool" size={20} className="text-slate-500"/>
+                                                    Analyse de Risques (ISO 12100)
+                                                </h5>
+                                                <p className="text-sm text-slate-600">
+                                                    Refonte d'un template modulaire d'analyse de risques applicable à toutes les machines. Structuration par sous-ensembles (tiroirs motorisés, tables élévatrices) avec automatisation du calcul de criticité croisée (fréquence / sévérité) pour orienter les choix de sécurité dès la phase amont.
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <h5 className="text-lg font-black uppercase text-slate-800 mb-4 flex items-center gap-2">
+                                                    <Icon name="activity" size={20} className="text-slate-500"/>
+                                                    Optimisation de Process (VBA)
+                                                </h5>
+                                                <p className="text-sm text-slate-600">
+                                                    Restructuration de macros VBA pour moderniser le générateur automatisé de Demandes d'Achat du bureau d'études. Nettoyage du code, ajout de spécifications normatives internationales, et fiabilisation de l'outil pour un gain de temps de traitement drastique par les chefs de projet.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Stats Impact */}
+                                        <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
+                                            <div>
+                                                <p className="text-4xl font-black tracking-tighter text-indigo-400">30s</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Génération de calculs RDM</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-indigo-400">+30</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Architectures CAO capitalisées</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-indigo-400">100%</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Conformité Sécurité intégrée</p>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 )}
-
                                 {/* CONTENU : VOLANT */}
                                 {tab === 'volant' && (
                                     <div className="animate-in fade-in">

@@ -537,27 +537,111 @@
                                     </div>
                                 )}
 
-                                {/* CONTENU : MEF */}
+                                {/* CONTENU : MEF (PROJET NUMÉRIQUE) */}
                                 {tab === 'mef' && (
-                                    <div className="animate-in fade-in">
-                                        <div className="flex flex-wrap gap-2 mb-8 uppercase text-[9px] font-black tracking-widest">
-                                            <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Méthode MEF</span>
-                                            <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Python Numérique</span>
-                                            <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Simulation</span>
+                                    <div className="animate-in fade-in space-y-12">
+                                        
+                                        {/* EN-TÊTE SÉPARÉ */}
+                                        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+                                            <div className="w-full lg:w-3/5">
+                                                <div className="flex flex-wrap gap-2 mb-6 uppercase text-[9px] font-black tracking-widest">
+                                                    <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Méthode MEF (Galerkin)</span>
+                                                    <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Python Numérique</span>
+                                                    <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Analyse Thermique</span>
+                                                </div>
+                                                <h4 className="text-4xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight mb-4">
+                                                    Simulation Thermique par Éléments Finis : Développement "From Scratch"
+                                                </h4>
+                                                <p className="text-rose-600 font-bold">Projet Numérique 4A — Polytech Lyon</p>
+                                            </div>
+                                            <div className="w-full lg:w-2/5 flex justify-center">
+                                                <img 
+                                                    src="projet-mef.png" 
+                                                    alt="Cartographie thermique Python" 
+                                                    className="w-full max-w-sm h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500 rounded-xl" 
+                                                    onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23e11d48' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'%3E%3C/path%3E%3C/svg%3E"; e.target.className="w-32 h-32 opacity-20"; }}
+                                                />
+                                            </div>
                                         </div>
-                                        <h4 className="text-4xl font-black mb-8 tracking-tighter text-rose-900">Simulation Thermique par MEF</h4>
-                                        <div className="grid lg:grid-cols-2 gap-12 items-center">
-                                            <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
-                                                <p className="text-lg">Modélisation et résolution numérique de l'équation de la chaleur bidimensionnelle pour l'optimisation d'une ailette électronique.</p>
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div className="bg-white p-5 border border-slate-100 rounded-2xl shadow-sm"><p className="text-[10px] font-black text-rose-600 uppercase mb-3 tracking-widest">Maillage</p><p className="text-sm text-slate-500">Analyse de convergence sur éléments triangulaires et quadrangulaires.</p></div>
-                                                    <div className="bg-white p-5 border border-slate-100 rounded-2xl shadow-sm"><p className="text-[10px] font-black text-rose-600 uppercase mb-3 tracking-widest">Calcul</p><p className="text-sm text-slate-500">Assemblage matriciel et résolution du système via algorithme Python.</p></div>
+
+                                        {/* INTRODUCTION & MATHÉMATIQUES */}
+                                        <div className="border-t border-slate-100 pt-10">
+                                            <h5 className="text-xl font-black uppercase text-slate-800 mb-6 flex items-center gap-3">
+                                                <Icon name="code" size={24} className="text-rose-500"/>
+                                                1. L'Enjeu : S'affranchir des logiciels commerciaux
+                                            </h5>
+                                            <div className="text-slate-600 text-sm leading-relaxed space-y-4">
+                                                <p>
+                                                    <strong>Problématique :</strong> L'objectif de ce projet n'était pas d'utiliser un logiciel MEF existant, mais de programmer intégralement un solveur en Python pour évaluer la propagation de la chaleur (équation de Laplace bidimensionnelle) dans une ailette de refroidissement.
+                                                </p>
+                                                <div className="bg-rose-50/50 border border-rose-100 p-6 rounded-2xl">
+                                                    <h6 className="font-bold text-rose-800 mb-2">Démarche Mathématique &amp; Numérique</h6>
+                                                    <p>La résolution s'est construite sur une approche rigoureuse des mathématiques appliquées :</p>
+                                                    <ul className="list-disc pl-5 mt-2 space-y-2 text-rose-900/80">
+                                                        <li><strong>Formulation Faible :</strong> Application de la méthode de Galerkin en intégrant les conditions aux limites (température imposée type Dirichlet à la base, et pertes par convection sur les bords).</li>
+                                                        <li><strong>Assemblage Matriciel :</strong> Discrétisation spatiale et calcul des matrices de raideur élémentaires locales avant l'assemblage du système global $AU=B$.</li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <div className="bg-rose-50 border border-rose-100 rounded-[2.5rem] flex items-center justify-center p-10 shadow-inner min-h-[300px]">
-                                                <Illustration type="thermique" />
+                                        </div>
+
+                                        {/* DEUX TYPES DE MAILLAGES */}
+                                        <div className="grid lg:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
+                                            
+                                            {/* COLONNE GAUCHE : P1 vs Q1 */}
+                                            <div className="space-y-6">
+                                                <h5 className="text-lg font-black uppercase text-slate-800 flex items-center gap-2">
+                                                    <Icon name="settings" size={20} className="text-rose-500"/>
+                                                    Stratégies de Maillage (P1 &amp; Q1)
+                                                </h5>
+                                                <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+                                                    <p>
+                                                        Le solveur a été développé pour supporter deux architectures d'éléments finis distinctes afin d'en comparer la précision et le coût de calcul :
+                                                    </p>
+                                                    <ul className="list-disc pl-5 space-y-2">
+                                                        <li><strong>Éléments P1 (Triangulaires) :</strong> Interpolation par polynômes de degré 1 sur 15 éléments.</li>
+                                                        <li><strong>Éléments Q1 (Quadrangulaires) :</strong> Interpolation bilinéaire offrant une cartographie plus lisse.</li>
+                                                        <li><strong>Analyse critique :</strong> L'étude a prouvé que la différence de précision entre P1 et Q1 diverge avec l'augmentation de la taille du domaine physique, imposant un ajustement proportionnel de la densité nodale.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            {/* COLONNE DROITE : Convergence */}
+                                            <div className="space-y-6">
+                                                <h5 className="text-lg font-black uppercase text-slate-800 flex items-center gap-2">
+                                                    <Icon name="activity" size={20} className="text-rose-500"/>
+                                                    Analyse de Convergence
+                                                </h5>
+                                                <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+                                                    <p>
+                                                        Pour valider la robustesse de l'algorithme Python, le code a été éprouvé sur une Équation Différentielle Ordinaire (EDO) à coefficients variables.
+                                                    </p>
+                                                    <ul className="list-disc pl-5 space-y-2">
+                                                        <li><strong>Test de finesse :</strong> Exécution de balayages allant de 5 à 135 nœuds.</li>
+                                                        <li><strong>Validation théorique :</strong> L'ajustement polynomial (polyfit) de l'erreur relative a révélé un coefficient de 1.9023.</li>
+                                                        <li><strong>Conclusion :</strong> Ce résultat confirme mathématiquement que l'algorithme possède une précision d'Ordre 2 ($O(h^2)$), validant formellement l'architecture du code.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        {/* Stats Impact */}
+                                        <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
+                                            <div>
+                                                <p className="text-4xl font-black tracking-tighter text-rose-400">P1 / Q1</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Éléments programmés</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-rose-400">135</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Nœuds de résolution max</p>
+                                            </div>
+                                            <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
+                                                <p className="text-4xl font-black tracking-tighter text-rose-400">Ordre 2</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Précision mathématique validée</p>
                                             </div>
                                         </div>
+
                                     </div>
                                 )}
 

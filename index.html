@@ -440,74 +440,97 @@
                                             </h5>
                                             <div className="text-slate-600 text-sm leading-relaxed space-y-4">
                                                 <p>
-                                                    <strong>Problématique :</strong> Dimensionner un système 100 % mécanique pour récupérer l'énergie de freinage (50 à 0 km/h) d'une citadine de 1000 kg. L'objectif cible était de 500 kJ sous de fortes contraintes de masse (&lt; 100 kg) et d'intégration.
+                                                    <strong>Problématique :</strong> Dimensionner un système 100 % mécanique pour récupérer l'énergie de freinage d'une citadine. L'objectif cible était de 500 kJ sous contraintes de masse (&lt; 100 kg) et d'intégration.
                                                 </p>
                                                 <div className="bg-rose-50/50 border border-rose-100 p-6 rounded-2xl">
                                                     <h6 className="font-bold text-rose-800 mb-2">Preuve de concept : L'élimination des ressorts</h6>
-                                                    <p>Historiquement envisagée, l'accumulation par ressorts a été la première piste explorée. J'ai développé un outil de dimensionnement RDM qui a mathématiquement prouvé l'impossibilité de cette solution[cite: 2] :</p>
+                                                    <p>Initialement envisagée, l'accumulation par ressorts a été la première piste explorée. J'ai développé un outil de dimensionnement qui a mathématiquement prouvé l'impossibilité de cette solution :</p>
                                                     <ul className="list-disc pl-5 mt-2 space-y-1 text-rose-900/80">
-                                                        <li>Pour atteindre 500 kJ, la contrainte de cisaillement interne dépasserait massivement la limite élastique (Von Mises) des meilleurs aciers (462 MPa)[cite: 2].</li>
-                                                        <li>L'optimisation du ratio poids/puissance plafonnait à 63,6 J/kg[cite: 2]. Pour atteindre l'objectif, il aurait fallu embarquer près de 7,9 tonnes de ressorts[cite: 2].</li>
+                                                        <li>Pour atteindre 500 kJ, la contrainte de cisaillement interne dépasserait massivement la limite élastique (Von Mises) des meilleurs aciers (462 MPa).</li>
+                                                        <li>L'optimisation du ratio poids/puissance plafonnait à 63,6 J/kg. Pour atteindre l'objectif, il aurait fallu embarquer près de 7,9 tonnes de ressorts.</li>
                                                     </ul>
-                                                    <p className="mt-2 font-medium">L'approche élastique ayant été écartée par le calcul, le projet s'est concentré sur deux technologies viables : l'inertie et la thermodynamique[cite: 2].</p>
+                                                    <p className="mt-2 font-medium">L'approche élastique ayant été écartée par le calcul, le projet s'est concentré sur deux technologies viables : l'inertie et la thermodynamique.</p>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        {/* DEUX TECHNOLOGIES EXPLORÉES */}
-                                        <div className="grid lg:grid-cols-2 gap-10 border-t border-slate-100 pt-10">
-                                            
-                                            {/* COLONNE GAUCHE : Volant d'inertie */}
-                                            <div className="space-y-6">
+                                        {/* VOIE A : VOLANT D'INERTIE */}
+                                        <div className="flex flex-col lg:flex-row items-center gap-10 border-t border-slate-100 pt-10">
+                                            <div className="w-full lg:w-3/5 space-y-5">
                                                 <h5 className="text-lg font-black uppercase text-slate-800 flex items-center gap-2">
                                                     <Icon name="settings" size={20} className="text-emerald-500"/>
                                                     Voie A : Le KERS Mécanique (Volant d'Inertie)
                                                 </h5>
                                                 <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
                                                     <p>
-                                                        Conception d'un module de stockage cinétique haute densité. Pour éviter l'éclatement du rotor (1,27 GPa de contrainte au centre pour un disque acier), j'ai opté pour une architecture hybride Acier/Carbone[cite: 2].
+                                                        Conception d'un module de stockage cinétique haute densité. Pour éviter l'éclatement du rotor (1,27 GPa de contrainte au centre pour un disque acier), j'ai opté pour une architecture hybride Acier/Carbone.
                                                     </p>
                                                     <ul className="list-disc pl-5 space-y-2">
-                                                        <li><strong>Dimensionnement :</strong> Rotor fretté carbone de 10,85 kg tournant à 40 000 tr/min, permettant d'atteindre les 563 kJ ciblés[cite: 2].</li>
-                                                        <li><strong>Modélisation Fluide :</strong> Calcul des pertes aérodynamiques en régime turbulent[cite: 2]. Mise en évidence de la nécessité d'une enceinte sous vide (10 mbar) pour réduire les pertes par traînée de 60 % à 3,5 % sur 2 minutes[cite: 2].</li>
-                                                        <li><strong>Simulation Python :</strong> Développement d'un solveur pour simuler les cycles de charge/décharge. Modélisation d'une transmission incluant un variateur toroïdal (CVT) et une boîte 2 rapports pour gérer une démultiplication extrême allant de 15 à 450[cite: 2].</li>
+                                                        <li><strong>Dimensionnement :</strong> Rotor fretté carbone de 10,85 kg tournant à 40 000 tr/min, permettant d'atteindre les 563 kJ ciblés.</li>
+                                                        <li><strong>Modélisation Fluide :</strong> Calcul des pertes aérodynamiques en régime turbulent. Mise en évidence de la nécessité d'une enceinte sous vide (10 mbar) pour <strong>diminuer de 94 % les pertes aérodynamiques</strong>.</li>
+                                                        <li><strong>Simulation Python :</strong> Développement d'un solveur pour simuler les cycles de charge/décharge avec un variateur toroïdal (CVT) et une boîte 2 rapports.</li>
                                                     </ul>
+                                                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 mt-4">
+                                                        <p className="font-bold text-slate-800 text-xs uppercase mb-1">Bilan Industriel Estimé</p>
+                                                        <p>Masse totale : 52,5 kg | Coût de revient moyen : <strong>7 750 €</strong></p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div className="w-full lg:w-2/5 flex justify-center">
+                                                <img 
+                                                    src="projet-volant.png" 
+                                                    alt="Volant d'inertie hybride" 
+                                                    className="w-full max-w-sm h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500" 
+                                                    onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8' stroke-dasharray='8 4'%3E%3C/circle%3E%3Ccircle cx='12' cy='12' r='4'%3E%3C/circle%3E%3C/svg%3E"; e.target.className="w-32 h-32 opacity-20"; }}
+                                                />
+                                            </div>
+                                        </div>
 
-                                            {/* COLONNE DROITE : Pneumatique & Cogénération */}
-                                            <div className="space-y-6">
+                                        {/* VOIE B : HYBRID-AIR */}
+                                        <div className="flex flex-col lg:flex-row items-center gap-10 border-t border-slate-100 pt-10">
+                                            <div className="w-full lg:w-3/5 space-y-5">
                                                 <h5 className="text-lg font-black uppercase text-slate-800 flex items-center gap-2">
                                                     <Icon name="activity" size={20} className="text-emerald-500"/>
                                                     Voie B : Hybrid-Air &amp; Cogénération
                                                 </h5>
                                                 <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
                                                     <p>
-                                                        Étude d'un système pneumatique utilisant un compresseur à pistons radiaux (soupapes électromagnétiques "Camless") pour stocker l'air à 35 bar dans des réservoirs de 160 L[cite: 2].
+                                                        Étude d'un système pneumatique utilisant un compresseur à pistons radiaux (soupapes électromagnétiques "Camless") pour stocker l'air à 35 bar dans des réservoirs de 160 L.
                                                     </p>
                                                     <ul className="list-disc pl-5 space-y-2">
-                                                        <li><strong>Structure (ASME) :</strong> Dimensionnement des réservoirs cylindriques (épaisseur 5,42 mm en acier, substitution recommandée par du composite pour respecter la limite des 100 kg)[cite: 2].</li>
-                                                        <li><strong>Thermodynamique :</strong> Identification du problème de chauffe adiabatique (555°C théorique)[cite: 2]. Intégration d'un refroidissement actif et d'une pression résiduelle (5 bar) pour fluidifier la détente[cite: 2].</li>
-                                                        <li><strong>Cogénération (Le point clé) :</strong> Ajout d'un échangeur thermique sur la ligne d'échappement[cite: 2]. En réchauffant l'air stocké à 320°C avant sa détente dans le moteur, on double le travail mécanique restitué aux roues (de 111 kJ à 225 kJ), transformant le système en véritable propulseur urbain[cite: 2].</li>
+                                                        <li><strong>Structure (ASME) :</strong> Dimensionnement de 4 réservoirs cylindriques sous plancher (épaisseur 5,42 mm en acier, substitution recommandée par du composite).</li>
+                                                        <li><strong>Thermodynamique :</strong> Identification de la chauffe adiabatique (555°C théorique). Intégration d'un refroidissement actif et maintien d'une pression résiduelle (5 bar) pour lisser la détente.</li>
+                                                        <li><strong>Cogénération :</strong> Ajout d'un échangeur thermique sur l'échappement. En réchauffant l'air stocké à 320°C avant détente, on double le travail restitué aux roues, transformant le système en propulseur urbain.</li>
                                                     </ul>
+                                                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 mt-4">
+                                                        <p className="font-bold text-slate-800 text-xs uppercase mb-1">Bilan Industriel Estimé</p>
+                                                        <p>Masse totale : &lt; 100 kg (avec composites) | Coût non chiffré mais favorisé par l'usage de composants standards économiques.</p>
+                                                    </div>
                                                 </div>
                                             </div>
-
+                                            <div className="w-full lg:w-2/5 flex justify-center">
+                                                <img 
+                                                    src="projet-pneumatique.png" 
+                                                    alt="Réservoirs pneumatiques" 
+                                                    className="w-full max-w-sm h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500" 
+                                                    onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M9 4v16M15 4v16'%3E%3C/path%3E%3C/svg%3E"; e.target.className="w-32 h-32 opacity-20"; }}
+                                                />
+                                            </div>
                                         </div>
 
                                         {/* Stats Impact */}
                                         <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-lg grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
                                             <div>
-                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">40k</p>
-                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Tr/min (Conception Hybride)</p>
+                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">563 kJ</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Stockage Voie A (Volant)</p>
                                             </div>
                                             <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
-                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">-94%</p>
-                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">De pertes aéro (Enceinte à 10 mbar)</p>
+                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">148 kJ</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Stockage Voie B (Pneumatique)</p>
                                             </div>
                                             <div className="border-t md:border-t-0 md:border-l border-slate-700 pt-4 md:pt-0">
-                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">+100%</p>
-                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">De travail restitué (Cogénération)</p>
+                                                <p className="text-4xl font-black tracking-tighter text-emerald-400">7 750 €</p>
+                                                <p className="text-xs font-bold uppercase tracking-widest mt-2 text-slate-400">Coût Estimé KERS (Voie A)</p>
                                             </div>
                                         </div>
 

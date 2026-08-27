@@ -546,7 +546,7 @@
                                             <div className="w-full lg:w-3/5">
                                                 <div className="flex flex-wrap gap-2 mb-6 uppercase text-[9px] font-black tracking-widest">
                                                     <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Méthode MEF (Galerkin)</span>
-                                                    <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Python Numérique</span>
+                                                    <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Python</span>
                                                     <span className="bg-rose-50 text-rose-600 px-3 py-1 rounded">Analyse Thermique</span>
                                                 </div>
                                                 <h4 className="text-4xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight mb-4">
@@ -555,12 +555,52 @@
                                                 <p className="text-rose-600 font-bold">Projet Numérique 4A — Polytech Lyon</p>
                                             </div>
                                             <div className="w-full lg:w-2/5 flex justify-center">
-                                                <img 
-                                                    src="projet-mef.png" 
-                                                    alt="Cartographie thermique Python" 
-                                                    className="w-full max-w-sm h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500 rounded-xl" 
-                                                    onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23e11d48' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'%3E%3C/path%3E%3C/svg%3E"; e.target.className="w-32 h-32 opacity-20"; }}
-                                                />
+                                                
+                                                {/* ILLUSTRATION 2D INLINE (SVG CODE) */}
+                                                <svg viewBox="-30 -30 260 260" className="w-full max-w-xs h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500 rounded-2xl bg-white border border-slate-100 p-4">
+                                                    <defs>
+                                                        {/* Gradient de chaleur (de chaud en bas vers froid en haut/droite) */}
+                                                        <linearGradient id="finGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                            <stop offset="0%" stopColor="#4c0519" /> {/* Très chaud (Base) */}
+                                                            <stop offset="30%" stopColor="#e11d48" /> {/* Chaud */}
+                                                            <stop offset="70%" stopColor="#fb7185" /> {/* Tiède */}
+                                                            <stop offset="100%" stopColor="#ffe4e6" /> {/* Froid (Bords) */}
+                                                        </linearGradient>
+                                                        {/* Maillage P1 simulé */}
+                                                        <pattern id="meshGrid" width="24" height="32" patternUnits="userSpaceOnUse">
+                                                            <path d="M 24 0 L 0 0 0 32" fill="none" stroke="#ffffff" strokeWidth="0.5" strokeOpacity="0.6"/>
+                                                            <path d="M 0 32 L 24 0" fill="none" stroke="#ffffff" strokeWidth="0.5" strokeOpacity="0.4"/>
+                                                        </pattern>
+                                                        {/* Flèches pour la convection */}
+                                                        <marker id="heatArrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb7185"/>
+                                                        </marker>
+                                                    </defs>
+                                                    
+                                                    {/* Ailette (Domaine physique) */}
+                                                    <rect x="40" y="20" width="120" height="160" fill="url(#finGradient)" rx="2"/>
+                                                    <rect x="40" y="20" width="120" height="160" fill="url(#meshGrid)" rx="2"/>
+                                                    <rect x="40" y="20" width="120" height="160" fill="none" stroke="#be123c" strokeWidth="2" rx="2"/>
+                                                    
+                                                    {/* Conditions aux limites */}
+                                                    
+                                                    {/* Base (Dirichlet - T imposée) */}
+                                                    <path d="M 35 180 L 165 180" stroke="#4c0519" strokeWidth="5" strokeLinecap="round"/>
+                                                    <text x="100" y="200" fontSize="11" fill="#4c0519" textAnchor="middle" fontWeight="bold">T = T₀ (Dirichlet)</text>
+                                                    
+                                                    {/* Bord gauche : Symétrie (Neumann) */}
+                                                    <path d="M 40 20 L 40 180" stroke="#e11d48" strokeWidth="3" strokeDasharray="4 4"/>
+                                                    <text x="25" y="100" fontSize="10" fill="#e11d48" transform="rotate(-90 25,100)" textAnchor="middle" fontWeight="600">Symétrie (∂T/∂x = 0)</text>
+                                                    
+                                                    {/* Bord droit : Convection */}
+                                                    <path d="M 165 60 L 185 60 M 165 100 L 185 100 M 165 140 L 185 140" stroke="#fb7185" strokeWidth="2" strokeLinecap="round" markerEnd="url(#heatArrow)"/>
+                                                    <text x="200" y="100" fontSize="10" fill="#fb7185" transform="rotate(90 200,100)" textAnchor="middle" fontWeight="600">Convection (h)</text>
+                                                    
+                                                    {/* Bord haut : Convection */}
+                                                    <path d="M 60 15 L 60 -5 M 100 15 L 100 -5 M 140 15 L 140 -5" stroke="#fb7185" strokeWidth="2" strokeLinecap="round" markerEnd="url(#heatArrow)"/>
+                                                    <text x="100" y="-15" fontSize="10" fill="#fb7185" textAnchor="middle" fontWeight="600">Convection (h)</text>
+                                                </svg>
+
                                             </div>
                                         </div>
 
@@ -572,14 +612,20 @@
                                             </h5>
                                             <div className="text-slate-600 text-sm leading-relaxed space-y-4">
                                                 <p>
-                                                    <strong>Problématique :</strong> L'objectif de ce projet n'était pas d'utiliser un logiciel MEF existant, mais de programmer intégralement un solveur en Python pour évaluer la propagation de la chaleur (équation de Laplace bidimensionnelle) dans une ailette de refroidissement.
+                                                    <strong>Problématique :</strong> L'objectif de ce projet n'était pas d'utiliser un logiciel MEF existant, mais de programmer intégralement un solveur en Python pour évaluer la propagation de la chaleur dans une ailette de refroidissement.
                                                 </p>
                                                 <div className="bg-rose-50/50 border border-rose-100 p-6 rounded-2xl">
                                                     <h6 className="font-bold text-rose-800 mb-2">Démarche Mathématique &amp; Numérique</h6>
+                                                    <p>Le point de départ est l'équation de la chaleur bidimensionnelle en régime stationnaire (Équation de Laplace) :</p>
+                                                    
+                                                    <div className="bg-white/80 border border-rose-100 py-3 px-4 rounded-xl my-4 text-center text-rose-900 font-mono text-base shadow-sm">
+                                                        ∂²T / ∂x² + ∂²T / ∂y² = 0
+                                                    </div>
+
                                                     <p>La résolution s'est construite sur une approche rigoureuse des mathématiques appliquées :</p>
-                                                    <ul className="list-disc pl-5 mt-2 space-y-2 text-rose-900/80">
-                                                        <li><strong>Formulation Faible :</strong> Application de la méthode de Galerkin en intégrant les conditions aux limites (température imposée type Dirichlet à la base, et pertes par convection sur les bords).</li>
-                                                        <li><strong>Assemblage Matriciel :</strong> Discrétisation spatiale et calcul des matrices de raideur élémentaires locales avant l'assemblage du système global $AU=B$.</li>
+                                                    <ul className="list-disc pl-5 mt-3 space-y-2 text-rose-900/80">
+                                                        <li><strong>Formulation Faible :</strong> Application de la méthode de Galerkin en intégrant les conditions aux limites (température imposée type Dirichlet à la base, et pertes par convection sur les bords haut et droit).</li>
+                                                        <li><strong>Assemblage Matriciel :</strong> Discrétisation spatiale et calcul des matrices de raideur élémentaires locales avant l'assemblage du système matriciel global AU = B.</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -619,7 +665,7 @@
                                                     <ul className="list-disc pl-5 space-y-2">
                                                         <li><strong>Test de finesse :</strong> Exécution de balayages allant de 5 à 135 nœuds.</li>
                                                         <li><strong>Validation théorique :</strong> L'ajustement polynomial (polyfit) de l'erreur relative a révélé un coefficient de 1.9023.</li>
-                                                        <li><strong>Conclusion :</strong> Ce résultat confirme mathématiquement que l'algorithme possède une précision d'Ordre 2 ($O(h^2)$), validant formellement l'architecture du code.</li>
+                                                        <li><strong>Conclusion :</strong> Ce résultat confirme mathématiquement que l'algorithme possède une précision d'Ordre 2 (O(h²)), validant formellement l'architecture du code.</li>
                                                     </ul>
                                                 </div>
                                             </div>

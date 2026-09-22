@@ -33,6 +33,15 @@
 
         const Icon = ({ name, size = 24, className = "" }) => {
             const icons = {
+                cv: (
+        <React.Fragment>
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+        </React.Fragment>
+    ),
                 settings: (
                     <React.Fragment>
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
@@ -87,6 +96,9 @@
                             <p className="text-[10px] font-bold text-indigo-600 tracking-[0.2em] mt-1 uppercase">Portfolio</p>
                         </div>
                         <div className="flex gap-6 items-center">
+                            <a href="CV Dylan Gay--Tesouro.pdf" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-indigo-600 transition-colors" title="Télécharger mon CV">
+            <Icon name="cv" size={20} />
+        </a>
                             <a href="https://www.linkedin.com/in/dylan-gay-tesouro-a764aa250/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-indigo-600 transition-colors">
                                 <Icon name="linkedin" size={20} />
                             </a>
@@ -97,54 +109,59 @@
                     </header>
 
                     {/* HERO BANNER - MODERNISÉ */}
-                    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-8 overflow-hidden border-b border-slate-100">
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none z-0">
-                            <div className="absolute top-10 right-0 w-96 h-96 bg-indigo-200/40 rounded-full blur-3xl opacity-50 mix-blend-multiply"></div>
-                            <div className="absolute -bottom-10 left-10 w-72 h-72 bg-blue-200/40 rounded-full blur-3xl opacity-50 mix-blend-multiply"></div>
-                        </div>
+                    <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-32 px-8 overflow-hidden border-b border-slate-100">
+    {/* Éléments de fond décoratifs */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none z-0">
+        <div className="absolute top-10 right-0 w-96 h-96 bg-indigo-200/40 rounded-full blur-3xl opacity-50 mix-blend-multiply"></div>
+        <div className="absolute -bottom-10 left-10 w-72 h-72 bg-blue-200/40 rounded-full blur-3xl opacity-50 mix-blend-multiply"></div>
+    </div>
 
-                        <div className="max-w-7xl mx-auto relative z-10 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
-                            
-                            <div className="w-full lg:w-3/5 flex flex-col items-center lg:items-start text-center lg:text-left">
-                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-black uppercase tracking-widest mb-6 shadow-sm">
-                                    <span className="relative flex h-2 w-2">
-                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                                      <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
-                                    </span>
-                                    Disponible pour de nouvelles opportunités
-                                </div>
-                                
-                                <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-4 leading-[1.1]">
-                                    Bonjour, je suis <br className="hidden lg:block"/>
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Dylan Gay-Tesouro</span>
-                                </h2>
-                                
-                                <h3 className="text-xl lg:text-2xl font-bold text-slate-800 mb-6 border-l-4 border-indigo-500 pl-4 py-1">
-                                    Ingénieur en Calcul Mécanique &amp; R&amp;D
-                                </h3>
+    <div className="max-w-7xl mx-auto relative z-10 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+        
+        {/* Colonne Gauche : Texte de Présentation */}
+        <div className="w-full lg:w-3/5 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-black uppercase tracking-widest mb-6 shadow-sm">
+                <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
+                </span>
+                Disponible pour de nouvelles opportunités
+            </div>
+            
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-4 leading-[1.1]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Dylan Gay-Tesouro</span>
+            </h2>
+            
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-800 mb-6 border-l-4 border-indigo-500 pl-4 py-1">
+                Ingénieur en Calcul Mécanique &amp; R&amp;D
+            </h3>
 
-                                <div className="space-y-4 mb-8 text-slate-600 leading-relaxed max-w-2xl">
-                                    <p>
-                                        Diplômé d'ingénierie mécanique à Polytech Lyon, je suis passionné par la <strong>modélisation numérique</strong>, la conception CAO (SolidWorks, CATIA V5) et la résolution de problèmes physiques complexes.
-                                    </p>
-                                    <p>
-                                        Je recherche activement un poste d'ingénieur en R&amp;D ou bureau d'études. Mon objectif ? Mettre à profit ma maîtrise des outils de simulation (Ansys, HyperMesh) et de programmation (Python, MATLAB) pour concevoir et optimiser des systèmes mécaniques innovants.
-                                    </p>
-                                </div>
+            <div className="space-y-4 mb-8 text-slate-600 leading-relaxed max-w-2xl">
+                <p>
+                    Diplômé d'ingénierie mécanique à Polytech Lyon, je suis passionné par la modélisation numérique, la conception CAO (SolidWorks, CATIA V5) et la résolution de problèmes physiques complexes.
+                </p>
+                <p>
+                    Je recherche activement un poste d'ingénieur en R&amp;D ou bureau d'études. Mon objectif ? Mettre à profit ma maîtrise des outils de simulation (Ansys, HyperMesh) et de programmation (Python, MATLAB) pour concevoir et optimiser des systèmes mécaniques innovants.
+                </p>
+            </div>
 
-                                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                                    <a href="mailto:dylangaytesouro@gmail.com" className="px-8 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white text-sm font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-200 flex items-center gap-2">
-                                        <Icon name="mail" size={18} />
-                                        Me contacter
-                                    </a>
-                                    <a href="#portfolio-grid" className="px-8 py-3.5 bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 text-sm font-bold rounded-xl transition-all flex items-center gap-2 group">
-                                        Découvrir mon profil
-                                        <svg className="w-4 h-4 text-slate-400 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                <a href="mailto:dylangaytesouro@gmail.com" className="px-8 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white text-sm font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-200 flex items-center gap-2">
+                    <Icon name="mail" size={18} />
+                    Me contacter
+                </a>
+                <a href="CV Dylan Gay--Tesouro.pdf" target="_blank" rel="noreferrer" className="px-8 py-3.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 text-sm font-bold rounded-xl transition-all flex items-center gap-2">
+                    <Icon name="cv" size={18} />
+                    Mon CV
+                </a>
+                <a href="#experiences" className="px-8 py-3.5 bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 text-sm font-bold rounded-xl transition-all flex items-center gap-2 group">
+                    Découvrir mon profil
+                    <svg className="w-4 h-4 text-slate-400 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
 
                             <div className="w-full lg:w-2/5 flex justify-center lg:justify-end">
                                 <div className="relative">
@@ -174,8 +191,14 @@
                     </section>
 
                     {/* NAVIGATION & CONTENU */}
-                    <section id="portfolio-grid" className="bg-slate-50/30 py-24 px-8">
-                        <div className="max-w-7xl mx-auto">
+                    <section id="experiences" className="bg-slate-100/50 py-24 px-8 border-t border-slate-200 shadow-inner">
+    <div className="max-w-7xl mx-auto">
+        
+        {/* TITRE DE SECTION POUR BIEN SÉPARER */}
+        <div className="mb-16 text-center lg:text-left">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 mb-4">Mes Expériences &amp; Projets</h2>
+            <p className="text-slate-500 font-medium">Découvrez mes réalisations en milieu industriel et académique.</p>
+        </div>
                             
                             {/* GRILLE 1 : STAGES */}
                             <div className="mb-12">
